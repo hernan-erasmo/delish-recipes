@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+
 import scrapy
-import items
+from ..items import Recipe
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 
@@ -18,7 +19,7 @@ class RecipiderSpider(CrawlSpider):
     )
 
     def parse_item(self, response):
-        item = items.Recipe()
+        item = Recipe()
         name = response.css('title::text')
         ingredients_list = response.css('div[class="ingredient-item"]')
         steps_list = response.css('div[class="direction-lists"]').css('li::text')
